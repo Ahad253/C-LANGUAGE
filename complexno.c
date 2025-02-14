@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 struct complexno {
-    int real;
-    int imaginary;
+    float real;
+    float imaginary;
 };
 
 struct complexno add(struct complexno num1, struct complexno num2) {
@@ -18,14 +18,14 @@ int main() {
 
     for (i = 0; i < 2; i++) {
         printf("Enter the complex number%d:i", i + 1);
-        scanf("%d",&s[i].imaginary);
+        scanf("%f",&s[i].imaginary);
         printf("+");
-        scanf("%d",&s[i].real);
+        scanf("%f",&s[i].real);
     }
 
     sum = add(s[0], s[1]);
 
-    printf("Sum of complex numbers: %d + %di\n", sum.real, sum.imaginary);
+    printf("Sum of complex numbers: %.2f + %.2fi\n", sum.real, sum.imaginary);
 
     return 0;
 }
