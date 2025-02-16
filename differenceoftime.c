@@ -1,46 +1,58 @@
 #include<stdio.h>
 #include<stdlib.h>
+struct time{
+	int hours;
+	int minutes;
+	float seconds;
+};
 int main (){
-	int hours[2],totalhours,i=0;
-	int minutes[2],totalminutes;
-	int seconds[2],totalseconds;
+	struct time s[2],temp;
+	int i=0,totalhours,totalminutes;
+	float totalseconds;
 	for(i=0;i<2;i++){
 	printf("enter the time%d\n",i+1);
 	printf("hours:\n");
-	scanf("%d",&hours[i]);
+	scanf("%d",&s[i].hours);
+	if(s[i].hours>24||s[i].hours<0){
+		printf("hours should be in range 0-24");
+		return 0;
+	}
 	printf("minutes\n:");
-	scanf("%d",&minutes[i]);
+	scanf("%d",&s[i].minutes);
+		if(s[i].minutes>60||s[i].minutes<0){
+		printf("minutes should be in range 0-59");
+		return 0;
+	}
 	printf("seconds\n:");
-	scanf("%d",&seconds[i]);
+	scanf("%f",&s[i].seconds);
+		if(s[i].seconds>60||s[i].seconds<0){
+		printf("seconds should be in range 0-59");
+		return 0;
+	}
 }
-    if (hours[0] < hours[1] || 
-       (hours[0] == hours[1] && minutes[0] < minutes[1]) ||
-       (hours[0] == hours[1] && minutes[0] == minutes[1] && seconds[0] < seconds[1])) {
-   	hours[0]=hours[0]+hours[1];
-   	hours[1]=hours[0]-hours[1];
-   	hours[0]=hours[0]-hours[1];
-   	minutes[0]=minutes[0]+minutes[1];
-   	minutes[1]=minutes[0]-minutes[1];
-   	minutes[0]=minutes[0]-minutes[1];
-   	seconds[0]=seconds[0]+seconds[1];
-   	seconds[1]=seconds[0]-seconds[1];
-   	seconds[0]=seconds[0]-seconds[1];
-   }
+    if (s[0].hours < s[1].hours || 
+       (s[0].hours == s[1].hours && s[0].minutes < s[1].minutes) ||
+       (s[0].hours == s[1].hours && s[0].minutes == s[1].minutes && s[0].seconds < s[1].seconds)) {
+        temp = s[0]; 
+        s[0] = s[1];
+        s[1] = temp;
+    }
+
   
-   if(seconds[1]>seconds[0]){
-   	seconds[0]+=60;
-   	minutes[0]-=1;
+   if(s[1].seconds>s[0].seconds){
+   	s[0].seconds+=60;
+   	s[0].minutes-=1;
    }
-    totalseconds=seconds[0]-seconds[1];
-   if(minutes[1]>minutes[0]){
-   	minutes[0]+=60;
-   	hours[0]-=1;
+    totalseconds=s[0].seconds-s[1].seconds;
+   if(s[1].minutes>s[0].minutes){
+   	s[0].minutes+=60;
+   	s[0].hours-=1;
    } 
-   totalminutes=minutes[0]-minutes[1];
-   totalhours=hours[0]-hours[1];
+   totalminutes=s[0].minutes-s[1].minutes;
+   totalhours=s[0].hours-s[1].hours;
    
     
-    printf("difference:%d:%d:%d",totalhours,totalminutes,totalseconds);
+    printf("difference:%d:%d:%.2f",totalhours,totalminutes,totalseconds);
 	return 0;
 	
 }
