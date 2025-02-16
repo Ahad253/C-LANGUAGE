@@ -24,7 +24,7 @@ int main (){
 	
 	totalfeet=s[0].feet+s[1].feet;
 	totalinches=s[0].inches+s[1].inches;
-	printf("%.2f\n",totalinches);
+	
 	
 if (totalinches >= 12) {
     totalfeet += totalinches / 12;  
