@@ -1,50 +1,43 @@
 #include <stdio.h>
 
 int main() {
-    char str[100], word[100], result[100];
-    int i = 0, j = 0, k = 0, found = 0;
-    printf("Enter the string:\n ");
+    char str[200], word[50];
+    char result[200];
+    int i = 0, j = 0, k, match;
+
+    printf("Enter the string: ");
     gets(str);
     
-    printf("Enter the word to remove:\n ");
+    printf("Enter word to remove: ");
     gets(word);
-
-    int len1 = 0;
-    while (str[len1] != '\0') {
-        len1++;
-    }
-    int len2 = 0;
-    while (word[len2] != '\0') {
-        len2++;
-    }
-    i = 0;
-    while (i <len1) {
-        found = 1;
-    for (j = 0; j < len2; j++) {
-    if (str[i + j] != word[j]) {
-    found = 0;
-     break;
-    }
-    }
-    if (found && (str[i + len2] == ' ' || str[i + len2] == '\0' || str[i + len2] == ',')) {
-            i =i+len1;  
-            if (str[i] == ' ') i++;  
-    } else {
-            result[k++] = str[i++];
-    }
+    
+    int wordLen = 0, strLen = 0;
+    while (word[wordLen] != '\0') wordLen++;  
+    while (str[strLen] != '\0') strLen++;  
+    
+    int index = 0;
+    while (i < strLen) {
+        match = 1;
+        k = 0;
+        while (word[k] != '\0') {
+        if (str[i + k] != word[k]) {
+            match = 0;
+            break;
+            }
+            k++;
+        }
+        
+        if (match && (i == 0 || str[i - 1] == ' ') && (str[i + k] == ' ' || str[i + k] == '\0')) {
+         i += wordLen;  
+            while (str[i] == ' ') i++; 
+        } else {
+            result[index++] = str[i++];
+        }
     }
     
+    result[index] = '\0';  
     
-    result[k] = '\0';
-    i = 0;
-    while (result[i] != '\0') {
-        str[i] = result[i];
-        i++;
-    }
-    str[i] = '\0';
-
-    printf("Updated string: %s\n", str);
-
+    printf("Updated string: %s\n", result);
+    
     return 0;
 }
-
